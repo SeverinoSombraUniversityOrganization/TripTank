@@ -2,7 +2,7 @@ import axios from 'axios';
 import BACKEND_API_URL from '../config/backendApiUrlConfig';
 
 class BaseEntityService {
-    constructor(entityName, baseUrl) {
+    constructor(entityName) {
         this.entityName = entityName;
         this.baseUrl = BACKEND_API_URL;
     }
