@@ -1,0 +1,62 @@
+version: "3"
+
+services: 
+
+  # trip-tank-expo-service:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: trip-tank-expo-service
+  #   ports: 
+  #     - 8081:8081
+  #     - 19000:19000
+  #     - 19001:19001
+  #     - 19002:19002
+  #   volumes:
+  #     - ./src:/usr/app
+  #     - expo_node_modules:/usr/app/node_modules
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - trip-tank-mongodb
+  #   restart: always
+  #   networks:
+  #     - trip-tank-network
+
+  trip-tank-backend-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    container_name: trip-tank-backend-service
+    command: npm run test 
+    ports: 
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - backend_node_modules:/usr/app/node_modules
+      - ./src/backend:/usr/app
+    env_file:
+      - .env
+    depends_on:
+      - trip-tank-mongodb
+    restart: always
+    networks:
+      - trip-tank-network
+
+  trip-tank-mongodb:
+    image: mongo:latest 
+    container_name: trip-tank-mongodb
+    ports:
+      - "${MONGO_HOST_EXTERNAL_PORT}:${MONGO_CONTAINER_INTERNAL_PORT}"
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - trip-tank-network
+
+volumes:
+  backend_node_modules:
+  expo_node_modules: 
+
+networks:
+  trip-tank-network:
+    external: true
