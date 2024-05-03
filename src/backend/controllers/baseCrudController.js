@@ -44,8 +44,8 @@ class BaseCrudController {
   async update(req, res, recordData = null) {
     const { id } = recordData || req.params;
     try {
-      const [updatedRows] = await this.repository.update(id, req.body);
-      if (updatedRows === 0) {
+      const updatedRow = await this.repository.update(id, req.body);
+      if (!updatedRow) {
         return res.status(404).json({ error: 'Record not found' });
       } else {
         return res.status(200).json({ message: 'Record updated successfully' });

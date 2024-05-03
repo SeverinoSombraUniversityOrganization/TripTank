@@ -5,6 +5,7 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import CreateUserScreen from './screens/CreateUserScreen';
 import CreateFuelScreen from './screens/CreateFuelScreen';
+import UpdateFuelScreen from './screens/UpdateFuelScreen';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -56,6 +57,10 @@ const Navigation = () => {
         <Stack.Screen
           name="CreateFuel"
           component={CreateFuelScreen}
+        />
+        <Stack.Screen
+          name="UpdateFuel"
+          component={UpdateFuelScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
