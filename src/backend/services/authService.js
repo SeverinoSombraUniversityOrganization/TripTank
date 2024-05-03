@@ -7,7 +7,7 @@ class AuthService {
 
     async signIn(username, password) {
         try {
-            const user = await userRepository.getByNameAndPassword(
+            const user = await userRepository.getByUsernameAndPassword(
                 username,
                 password,
             );            
